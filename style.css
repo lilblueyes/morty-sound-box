@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #dac390;
+  font-family: "Poppins", sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px;
+  padding: max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+
+  overflow: auto;
+  margin: 0;
+}
+
+/* Carte de l'app */
+.app {
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 1.8rem 1.9rem;
+  max-width: 480px;
+  width: 90vw;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+}
+
+/* Titre et sous-titre */
+header h1 {
+  margin: 0 0 4.25rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+audio {
+  display: none;
+}
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+/* Style de base des boutons */
+.btn {
+  background-color: #c5af80ad;
+  border-radius: 999px;
+  border: none;
+  color: #fff;
+  margin: 0.35rem;
+  padding: 0.9rem 1.9rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  max-width: 80vw;
+  min-width: 160px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease,
+    background-color 0.1s ease, color 0.1s ease;
+}
+
+.btn.playing {
+  background-color: #ffffff;
+  color: #44381dc0;
+  transform: scale(1.05);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.5);
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:focus {
+  outline: none;
+}
