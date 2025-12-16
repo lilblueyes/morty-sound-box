@@ -1,46 +1,63 @@
-const sounds = ["applause", "boo", "gasp"];
 const buttonsContainer = document.getElementById("buttons");
 
-const stopSounds = () => {
-  // Stop tous les sons
-  sounds.forEach((sound) => {
-    const audio = document.getElementById(sound);
-    if (!audio) return;
-    audio.pause();
-    audio.currentTime = 0;
-  });
+const sounds = [
+  { key: "applePay1", label: "Apple Pay", src: "./sounds/apple-pay.mp3" },
+  { key: "applePay2", label: "Test 2", src: "./sounds/apple-pay.mp3" },
+  { key: "applePay3", label: "Test 3", src: "./sounds/apple-pay.mp3" },
+  { key: "applePay4", label: "Test 4", src: "./sounds/apple-pay.mp3" },
+];
 
-  // Retire l'état "playing" de tous les boutons
-  document.querySelectorAll(".btn").forEach((btn) => {
-    btn.classList.remove("playing");
-  });
-};
+// Haptique (best effort). iOS peut l’ignorer, mais aucun souci si c’est bloqué.
+function hapticTap(strength = "light") {
+  try {
+    if (!("vibrate" in navigator)) return;
+    const pattern = strength === "light" ? 10 : strength === "medium" ? 20 : 30;
+    navigator.vibrate(pattern);
+  } catch (_) {}
+}
 
 sounds.forEach((sound) => {
-  const audio = document.getElementById(sound);
-  if (!audio) return;
-
   const btn = document.createElement("button");
-  btn.classList.add("btn");
-  btn.innerText = sound; // tu peux renommer en français si tu veux
+  btn.className = "sound-btn";
+  btn.type = "button";
 
-  btn.addEventListener("click", () => {
-    const isAlreadyPlaying =
-      !audio.paused && !audio.ended && audio.currentTime > 0;
+  btn.innerHTML = `
+    <div class="sound-btn__title">${sound.label}</div>
+    <div class="sound-btn__subtitle">Tap</div>
+  `;
 
-    // On stoppe tout
-    stopSounds();
+  let playingCount = 0;
 
-    // Si on reclique sur le bouton déjà en lecture, on arrête juste
-    if (!isAlreadyPlaying) {
-      audio.play();
-      btn.classList.add("playing");
+  btn.addEventListener("click", async () => {
+    hapticTap("light");
+
+    const audio = new Audio(sound.src);
+
+    playingCount += 1;
+    btn.classList.add("is-playing");
+    btn.classList.add("pulse");
+
+    try {
+      audio.currentTime = 0;
+      await audio.play();
+    } catch (e) {
+      playingCount = Math.max(0, playingCount - 1);
+      if (playingCount === 0) btn.classList.remove("is-playing");
+      btn.classList.remove("pulse");
+      console.error(`Impossible de jouer ${sound.src}`, e);
+      return;
     }
-  });
 
-  // Quand le son se termine, on enlève l'état playing
-  audio.addEventListener("ended", () => {
-    btn.classList.remove("playing");
+    const cleanup = () => {
+      playingCount = Math.max(0, playingCount - 1);
+      if (playingCount === 0) btn.classList.remove("is-playing");
+      if (playingCount === 0) btn.classList.remove("pulse");
+      audio.removeEventListener("ended", cleanup);
+      audio.removeEventListener("pause", cleanup);
+    };
+
+    audio.addEventListener("ended", cleanup);
+    audio.addEventListener("pause", cleanup);
   });
 
   buttonsContainer.appendChild(btn);
