@@ -4,18 +4,20 @@
   --bg: #ffffff;
   --text: #2b1e14;
 
+  /* Marron clair repos */
   --card: #f3e6d8;
   --card-press: #ead6c2;
 
+  /* Marron clair playing */
   --card-playing: #d9c2a8;
   --card-playing-press: #cfb59a;
 
-  --border: rgba(120, 80, 40, 0.22);
+  --border: rgba(120, 80, 40, 0.18);
 
-  --shadow: 0 8px 20px rgba(120, 80, 40, 0.14);
-  --shadow-playing: 0 14px 30px rgba(120, 80, 40, 0.22);
+  --shadow: 0 10px 26px rgba(120, 80, 40, 0.12);
+  --shadow-playing: 0 18px 44px rgba(120, 80, 40, 0.20);
 
-  --radius: 18px;
+  --radius: 20px;
 }
 
 * { box-sizing: border-box; }
@@ -26,6 +28,9 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 .app {
@@ -38,25 +43,30 @@ body {
 header {
   position: sticky;
   top: 0;
-  background: #ffffff;
-  padding: 16px 0;
   z-index: 10;
+
+  padding: 14px 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 header h1 {
   margin: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 main {
   flex: 1;
-  padding: 12px 0 18px 0;
+  padding: 14px 0 18px 0;
 }
 
 #buttons {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   grid-template-columns: 1fr 1fr;
 }
 
@@ -64,10 +74,11 @@ main {
   #buttons { grid-template-columns: 1fr 1fr 1fr; }
 }
 
-/* Pad */
 .sound-btn {
   position: relative;
+
   appearance: none;
+  -webkit-appearance: none;
 
   border: 1px solid var(--border);
   background: var(--card);
@@ -78,29 +89,41 @@ main {
   overflow: hidden;
 
   box-shadow: var(--shadow);
+
+  /* Transitions stables, pas d’effet flash */
   transition:
     transform 0.12s ease,
     box-shadow 0.15s ease,
-    background-color 0.15s ease,
+    background-color 0.10s linear,
     border-color 0.15s ease;
 
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   color: var(--text);
-  -webkit-appearance: none;
-  appearance: none;
 }
 
 .sound-btn * { color: var(--text); }
 
-/* Image plein pad, réglable via variables */
+/* Bord interne subtil */
+.sound-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(43, 30, 20, 0.10);
+  pointer-events: none;
+}
+
+/* Image plein pad, réglable par variables */
 .sound-btn__icon {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-
   object-fit: contain;
   pointer-events: none;
 
@@ -110,7 +133,7 @@ main {
   transform-origin: center;
 }
 
-/* Texte collé en bas */
+/* Texte en bas */
 .sound-btn__title {
   position: absolute;
   left: 0;
@@ -121,38 +144,42 @@ main {
   text-align: center;
 
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 650;
   letter-spacing: -0.01em;
 
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-/* Press */
-.sound-btn:active {
+/* Press: uniquement quand PAS playing */
+.sound-btn:not(.is-playing):active {
   transform: scale(0.97);
   background: var(--card-press);
 }
 
-/* Playing */
+/* Playing: couleur stable + zoom stable */
 .sound-btn.is-playing {
   background: var(--card-playing);
-  border-color: rgba(120, 80, 40, 0.40);
-  box-shadow: var(--shadow-playing);
+  border-color: rgba(120, 80, 40, 0.34);
+  box-shadow: var(--shadow-playing), 0 0 0 2px rgba(255, 255, 255, 0.55);
   transform: scale(1.03);
 }
 
+/* Quand playing, on évite tout changement au tap: pas de flash */
 .sound-btn.is-playing:active {
-  background: var(--card-playing-press);
-  transform: scale(1.02);
+  background: var(--card-playing);
+  transform: scale(1.03);
 }
 
+/* Focus */
 .sound-btn:focus-visible {
-  outline: 3px solid rgba(120, 80, 40, 0.30);
+  outline: 3px solid rgba(120, 80, 40, 0.28);
   outline-offset: 2px;
 }
 
-/* Overrides par image (tu ajustes comme tu veux) */
+/* Overrides par image */
 .img-m1 { --img-scale: 1.15; --img-y: 0px; }
 .img-m2 { --img-scale: 1.25; --img-y: 2px; }
 .img-m3 { --img-scale: 1.10; --img-y: -2px; }
