@@ -15,11 +15,7 @@ sounds.forEach((sound) => {
   const btn = document.createElement("button");
   btn.className = "sound-btn";
   btn.type = "button";
-
-  btn.innerHTML = `
-    <div class="sound-btn__title">${sound.label}</div>
-    <div class="sound-btn__subtitle">Tap</div>
-  `;
+  btn.innerHTML = `<div class="sound-btn__title">${sound.label}</div>`;
 
   let playingCount = 0;
 
@@ -36,8 +32,7 @@ sounds.forEach((sound) => {
     } catch (e) {
       playingCount = Math.max(0, playingCount - 1);
       if (playingCount === 0) {
-        btn.classList.remove("is-playing");
-        btn.classList.remove("pulse");
+        btn.classList.remove("is-playing", "pulse");
       }
       console.error(`Impossible de jouer ${sound.src}`, e);
       return;
@@ -46,8 +41,7 @@ sounds.forEach((sound) => {
     const cleanup = () => {
       playingCount = Math.max(0, playingCount - 1);
       if (playingCount === 0) {
-        btn.classList.remove("is-playing");
-        btn.classList.remove("pulse");
+        btn.classList.remove("is-playing", "pulse");
       }
       audio.removeEventListener("ended", cleanup);
       audio.removeEventListener("pause", cleanup);

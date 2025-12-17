@@ -4,32 +4,36 @@
   --bg: #ffffff;
   --text: #2b1e14;
 
-  /* Marron clair */
+  /* Marron clair (repos) */
   --card: #f3e6d8;
-  --card-2: #f7ede2;
-  --card-active: #ead6c2;
+  --card-press: #ead6c2;
+
+  /* Marron clair (playing) */
+  --card-playing: #d9c2a8;
+  --card-playing-press: #cfb59a;
 
   --border: rgba(120, 80, 40, 0.22);
-  --border-strong: rgba(120, 80, 40, 0.30);
 
-  --muted: #7a5a3a;
+  --shadow: 0 8px 20px rgba(120, 80, 40, 0.14);
+  --shadow-playing: 0 14px 30px rgba(120, 80, 40, 0.22);
 
-  --shadow: 0 10px 26px rgba(120, 80, 40, 0.14);
-  --shadow-strong: 0 16px 40px rgba(120, 80, 40, 0.22);
-
-  --radius: 22px;
+  --radius: 18px;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,45 +45,30 @@ body {
   flex-direction: column;
 }
 
-/* Header premium */
+/* Header simple et clean */
 
 header {
   position: sticky;
   top: 0;
+  background: #ffffff;
+  padding: 16px 0;
   z-index: 10;
-
-  padding: 16px 0 12px 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 header h1 {
   margin: 0;
   font-size: 20px;
-  letter-spacing: -0.02em;
-  font-weight: 800;
-}
-
-header::after {
-  content: "Soundboard";
-  display: block;
-  margin-top: 4px;
-  font-size: 12px;
-  color: rgba(43, 30, 20, 0.55);
-  letter-spacing: 0.02em;
+  font-weight: 700;
 }
 
 /* Main */
 
 main {
   flex: 1;
-  padding: 14px 0 18px 0;
+  padding: 12px 0 18px 0;
 }
 
-/* Grille pads */
+/* Grille */
 
 #buttons {
   display: grid;
@@ -98,84 +87,64 @@ main {
 .sound-btn {
   appearance: none;
   border: 1px solid var(--border);
+  background: var(--card);
   border-radius: var(--radius);
   padding: 16px;
-  text-align: left;
-
-  background: linear-gradient(180deg, var(--card-2), var(--card));
-  box-shadow: var(--shadow);
-
-  transition: transform 0.06s ease,
-              box-shadow 0.15s ease,
-              border-color 0.15s ease,
-              filter 0.15s ease;
-
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
 
   aspect-ratio: 1 / 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-end;
 
-  position: relative;
-  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* petite brillance */
-.sound-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    120px 120px at 25% 18%,
-    rgba(255, 255, 255, 0.55),
-    rgba(255, 255, 255, 0.0) 60%
-  );
-  pointer-events: none;
-}
+/* Press */
 
 .sound-btn:active {
   transform: scale(0.97);
-  background: linear-gradient(180deg, var(--card), var(--card-active));
-  box-shadow: 0 6px 18px rgba(120, 80, 40, 0.18);
-  filter: saturate(1.02);
+  background: var(--card-press);
 }
+
+/* Texte */
 
 .sound-btn__title {
   font-size: 16px;
-  font-weight: 850;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  color: var(--text);
-  line-height: 1.1;
 }
 
-.sound-btn__subtitle {
-  margin-top: 8px;
-  font-size: 12px;
-  color: rgba(122, 90, 58, 0.85);
-}
-
-/* Playing state */
+/* Playing: changement de couleur net */
 
 .sound-btn.is-playing {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-strong);
+  background: var(--card-playing);
+  border-color: rgba(120, 80, 40, 0.40);
+  box-shadow: var(--shadow-playing);
 }
 
-/* Pulse animation */
+.sound-btn.is-playing:active {
+  background: var(--card-playing-press);
+}
+
+/* Pulse très léger */
 
 @keyframes pulse {
   0%   { transform: scale(1); }
-  50%  { transform: scale(1.012); }
+  50%  { transform: scale(1.01); }
   100% { transform: scale(1); }
 }
 
 .sound-btn.pulse {
-  animation: pulse 0.9s ease-in-out infinite;
+  animation: pulse 1s ease-in-out infinite;
 }
 
-/* Accessibilité */
+/* Focus */
 
 .sound-btn:focus-visible {
   outline: 3px solid rgba(120, 80, 40, 0.30);
