@@ -207,47 +207,44 @@ main {
 /* Overrides images (exemples, ajuste) */
 
 .img-m1 {
-  --img-scale: 1.15;
+  --img-scale: 0.9;
   --img-x: 0px;
   --img-y: 0px;
 }
 .img-m2 {
-  --img-scale: 1.25;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: 2px;
 }
 .img-m3 {
-  --img-scale: 1.1;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: -2px;
 }
 .img-m4 {
-  --img-scale: 1.2;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: 0px;
 }
 .img-m5 {
-  --img-scale: 1.18;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: 1px;
 }
 .img-m7 {
-  --img-scale: 1.3;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: 0px;
 }
 .img-m8 {
-  --img-scale: 1.12;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: -1px;
 }
 .img-m9 {
-  --img-scale: 1.22;
+  --img-scale: 1;
   --img-x: 0px;
   --img-y: 0px;
 }
 
 .sound-btn__title { user-select: none; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-#buttons { animation: fadeUp 220ms ease both; }
