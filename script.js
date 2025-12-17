@@ -1,21 +1,32 @@
 const buttonsContainer = document.getElementById("buttons");
 
 const sounds = [
-  { key: "s1", label: "Apple Pay", src: "./sounds/apple-pay.mp3" },
-  { key: "s2", label: "Test 2", src: "./sounds/apple-pay.mp3" },
-  { key: "s3", label: "Test 3", src: "./sounds/apple-pay.mp3" },
-  { key: "s4", label: "Test 4", src: "./sounds/apple-pay.mp3" },
-  { key: "s5", label: "Test 5", src: "./sounds/apple-pay.mp3" },
-  { key: "s6", label: "Test 6", src: "./sounds/apple-pay.mp3" },
-  { key: "s7", label: "Test 7", src: "./sounds/apple-pay.mp3" },
-  { key: "s8", label: "Test 8", src: "./sounds/apple-pay.mp3" },
+  { key: "m1", label: "I Like To Move It", src: "./sounds/apple-pay.mp3" },
+  { key: "m2", label: "Move It!", src: "./sounds/apple-pay.mp3" },
+  { key: "m3", label: "Yeah!", src: "./sounds/apple-pay.mp3" },
+  { key: "m4", label: "King Julien!", src: "./sounds/apple-pay.mp3" },
+  { key: "m5", label: "Show Me Some Love", src: "./sounds/apple-pay.mp3" },
+  { key: "m6", label: "Everybody Dance", src: "./sounds/apple-pay.mp3" },
+  { key: "m7", label: "This Is How We Do", src: "./sounds/apple-pay.mp3" },
+  { key: "m8", label: "Dance Dance", src: "./sounds/apple-pay.mp3" },
 ];
 
 sounds.forEach((sound) => {
   const btn = document.createElement("button");
   btn.className = "sound-btn";
   btn.type = "button";
-  btn.innerHTML = `<div class="sound-btn__title">${sound.label}</div>`;
+
+  btn.innerHTML = `
+    <div class="sound-btn__content">
+      <img
+        class="sound-btn__icon"
+        src="./assets/icon.png"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
+    <div class="sound-btn__title">${sound.label}</div>
+  `;
 
   let playingCount = 0;
 
@@ -24,25 +35,19 @@ sounds.forEach((sound) => {
 
     playingCount += 1;
     btn.classList.add("is-playing");
-    btn.classList.add("pulse");
 
     try {
       audio.currentTime = 0;
       await audio.play();
     } catch (e) {
       playingCount = Math.max(0, playingCount - 1);
-      if (playingCount === 0) {
-        btn.classList.remove("is-playing", "pulse");
-      }
-      console.error(`Impossible de jouer ${sound.src}`, e);
+      if (playingCount === 0) btn.classList.remove("is-playing");
       return;
     }
 
     const cleanup = () => {
       playingCount = Math.max(0, playingCount - 1);
-      if (playingCount === 0) {
-        btn.classList.remove("is-playing", "pulse");
-      }
+      if (playingCount === 0) btn.classList.remove("is-playing");
       audio.removeEventListener("ended", cleanup);
       audio.removeEventListener("pause", cleanup);
     };
