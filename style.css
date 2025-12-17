@@ -246,3 +246,8 @@ main {
   --img-x: 0px;
   --img-y: 0px;
 }
+
+.sound-btn__title { user-select: none; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+#buttons { animation: fadeUp 220ms ease both; }
