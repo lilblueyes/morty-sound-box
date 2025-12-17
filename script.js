@@ -1,14 +1,54 @@
 const buttonsContainer = document.getElementById("buttons");
 
 const sounds = [
-  { key: "m1", label: "I Like To Move It", src: "./sounds/apple-pay.mp3" },
-  { key: "m2", label: "Move It!", src: "./sounds/apple-pay.mp3" },
-  { key: "m3", label: "Yeah!", src: "./sounds/apple-pay.mp3" },
-  { key: "m4", label: "King Julien!", src: "./sounds/apple-pay.mp3" },
-  { key: "m5", label: "Show Me Some Love", src: "./sounds/apple-pay.mp3" },
-  { key: "m6", label: "Everybody Dance", src: "./sounds/apple-pay.mp3" },
-  { key: "m7", label: "This Is How We Do", src: "./sounds/apple-pay.mp3" },
-  { key: "m8", label: "Dance Dance", src: "./sounds/apple-pay.mp3" },
+  {
+    key: "m1",
+    label: "I Like To Move It",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview.png",
+  },
+  {
+    key: "m2",
+    label: "Move It!",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (1).png",
+  },
+  {
+    key: "m3",
+    label: "Yeah!",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (2).png",
+  },
+  {
+    key: "m4",
+    label: "King Julien!",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (3).png",
+  },
+  {
+    key: "m5",
+    label: "Show Me Some Love",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (4).png",
+  },
+  {
+    key: "m6",
+    label: "Everybody Dance",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview.png",
+  },
+  {
+    key: "m7",
+    label: "This Is How We Do",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (1).png",
+  },
+  {
+    key: "m8",
+    label: "Dance Dance",
+    src: "./sounds/apple-pay.mp3",
+    img: "./assets/image-removebg-preview (2).png",
+  },
 ];
 
 sounds.forEach((sound) => {
@@ -17,14 +57,12 @@ sounds.forEach((sound) => {
   btn.type = "button";
 
   btn.innerHTML = `
-    <div class="sound-btn__content">
-      <img
-        class="sound-btn__icon"
-        src="./assets/icon.png"
-        alt=""
-        aria-hidden="true"
-      />
-    </div>
+    <img
+      src="${sound.img}"
+      class="sound-btn__icon"
+      alt=""
+      aria-hidden="true"
+    />
     <div class="sound-btn__title">${sound.label}</div>
   `;
 
@@ -39,7 +77,7 @@ sounds.forEach((sound) => {
     try {
       audio.currentTime = 0;
       await audio.play();
-    } catch (e) {
+    } catch {
       playingCount = Math.max(0, playingCount - 1);
       if (playingCount === 0) btn.classList.remove("is-playing");
       return;
