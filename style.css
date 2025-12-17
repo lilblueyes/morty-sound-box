@@ -19,7 +19,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html, body { height: 100%; }
 
 body {
@@ -36,8 +35,6 @@ body {
   flex-direction: column;
 }
 
-/* Header */
-
 header {
   position: sticky;
   top: 0;
@@ -52,14 +49,10 @@ header h1 {
   font-weight: 700;
 }
 
-/* Main */
-
 main {
   flex: 1;
   padding: 12px 0 18px 0;
 }
-
-/* Grid */
 
 #buttons {
   display: grid;
@@ -72,18 +65,16 @@ main {
 }
 
 /* Pad */
-
 .sound-btn {
   position: relative;
-
   appearance: none;
+
   border: 1px solid var(--border);
   background: var(--card);
   border-radius: var(--radius);
 
   aspect-ratio: 1 / 1;
   padding: 0;
-
   overflow: hidden;
 
   box-shadow: var(--shadow);
@@ -95,22 +86,31 @@ main {
 
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+
+  color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-/* PNG plein pad */
+.sound-btn * { color: var(--text); }
 
+/* Image plein pad, réglable via variables */
 .sound-btn__icon {
   position: absolute;
-  inset: 8px;              /* marge légère pour respirer */
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
 
   object-fit: contain;
   pointer-events: none;
+
+  transform:
+    translateY(var(--img-y, 0px))
+    scale(var(--img-scale, 1.0));
+  transform-origin: center;
 }
 
-/* Texte collé en bas (comme à l’origine) */
-
+/* Texte collé en bas */
 .sound-btn__title {
   position: absolute;
   left: 0;
@@ -129,14 +129,12 @@ main {
 }
 
 /* Press */
-
 .sound-btn:active {
   transform: scale(0.97);
   background: var(--card-press);
 }
 
 /* Playing */
-
 .sound-btn.is-playing {
   background: var(--card-playing);
   border-color: rgba(120, 80, 40, 0.40);
@@ -149,19 +147,17 @@ main {
   transform: scale(1.02);
 }
 
-/* Focus */
-
 .sound-btn:focus-visible {
   outline: 3px solid rgba(120, 80, 40, 0.30);
   outline-offset: 2px;
 }
 
-.sound-btn {
-  color: var(--text);
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.sound-btn * {
-  color: var(--text);
-}
+/* Overrides par image (tu ajustes comme tu veux) */
+.img-m1 { --img-scale: 1.15; --img-y: 0px; }
+.img-m2 { --img-scale: 1.25; --img-y: 2px; }
+.img-m3 { --img-scale: 1.10; --img-y: -2px; }
+.img-m4 { --img-scale: 1.20; --img-y: 0px; }
+.img-m5 { --img-scale: 1.18; --img-y: 1px; }
+.img-m7 { --img-scale: 1.30; --img-y: 0px; }
+.img-m8 { --img-scale: 1.12; --img-y: -1px; }
+.img-m9 { --img-scale: 1.22; --img-y: 0px; }

@@ -2,52 +2,44 @@ const buttonsContainer = document.getElementById("buttons");
 
 const sounds = [
   {
-    key: "m1",
     label: "I Like To Move It",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview.png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m1.png",
   },
   {
-    key: "m2",
     label: "Move It!",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (1).png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m2.png",
   },
   {
-    key: "m3",
     label: "Yeah!",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (2).png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m3.png",
   },
   {
-    key: "m4",
     label: "King Julien!",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (3).png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m4.png",
   },
   {
-    key: "m5",
     label: "Show Me Some Love",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (4).png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m5.png",
   },
   {
-    key: "m6",
     label: "Everybody Dance",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview.png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m7.png",
   },
   {
-    key: "m7",
     label: "This Is How We Do",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (1).png",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m8.png",
   },
   {
-    key: "m8",
-    label: "Dance Dance",
-    src: "./sounds/apple-pay.mp3",
-    img: "./assets/image-removebg-preview (2).png",
+    label: "Encore!",
+    audio: "./sounds/apple-pay.mp3",
+    image: "./assets/m9.png",
   },
 ];
 
@@ -58,7 +50,7 @@ sounds.forEach((sound) => {
 
   btn.innerHTML = `
     <img
-      src="${sound.img}"
+      src="${sound.image}"
       class="sound-btn__icon"
       alt=""
       aria-hidden="true"
@@ -69,7 +61,7 @@ sounds.forEach((sound) => {
   let playingCount = 0;
 
   btn.addEventListener("click", async () => {
-    const audio = new Audio(sound.src);
+    const audio = new Audio(sound.audio);
 
     playingCount += 1;
     btn.classList.add("is-playing");
@@ -77,7 +69,7 @@ sounds.forEach((sound) => {
     try {
       audio.currentTime = 0;
       await audio.play();
-    } catch {
+    } catch (err) {
       playingCount = Math.max(0, playingCount - 1);
       if (playingCount === 0) btn.classList.remove("is-playing");
       return;
