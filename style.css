@@ -182,9 +182,9 @@ main {
   --img-y: 2px;
 }
 .img-m3 {
-  --img-scale: 1;
-  --img-x: 0px;
-  --img-y: -2px;
+  --img-scale: 1.05;
+  --img-x: -10px;
+  --img-y: 10px
 }
 .img-m4 {
   --img-scale: 1;
