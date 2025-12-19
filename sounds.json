@@ -1,50 +1,32 @@
 [
   {
-    "label": "I Like To Move It",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m1.png",
-    "imageClass": "img-m1"
-  },
-  {
-    "label": "Move It!",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m2.png",
-    "imageClass": "img-m2"
-  },
-  {
-    "label": "Yeah!",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m3.png",
-    "imageClass": "img-m3"
-  },
-  {
-    "label": "King Julien!",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m4.png",
-    "imageClass": "img-m4"
-  },
-  {
-    "label": "Show Me Some Love",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m5.png",
-    "imageClass": "img-m5"
-  },
-  {
-    "label": "Everybody Dance",
-    "audio": "./sounds/apple-pay.mp3",
-    "image": "./assets/m7.png",
-    "imageClass": "img-m7"
-  },
-  {
-    "label": "This Is How We Do",
-    "audio": "./sounds/apple-pay.mp3",
+    "label": "I don't like king Julian, I love him",
+    "audio": "./sounds/love.mp3",
     "image": "./assets/m8.png",
     "imageClass": "img-m8"
   },
   {
-    "label": "Encore!",
-    "audio": "./sounds/apple-pay.mp3",
+    "label": "I'm a sacrifice",
+    "audio": "./sounds/sacrify.mp3",
     "image": "./assets/m9.png",
     "imageClass": "img-m9"
+  },
+  {
+    "label": "Miskine",
+    "audio": "./sounds/crying.mp3",
+    "image": "./assets/miskine.png",
+    "imageClass": "img-miskine"
+  },
+  {
+    "label": "Oh King Julian",
+    "audio": "./sounds/ohh.mp3",
+    "image": "./assets/m2.png",
+    "imageClass": "img-m2"
+  },
+  {
+    "label": "Hihihi",
+    "audio": "./sounds/hihihi.mp3",
+    "image": "./assets/m3.png",
+    "imageClass": "img-m3"
   }
 ]
